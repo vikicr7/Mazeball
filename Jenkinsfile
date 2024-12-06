@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'k8s-server' }
     stages {
         stage('Pull Code From GitHub') {
             steps {
@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Build the Docker image') {
             steps {
-                sh 'sudo docker build -t mazeimage /var/lib/jenkins/workspace/game-project'
+                sh 'sudo docker build -t mazeimage /home/vijay/workspace/game-project'
                 sh 'sudo docker tag mazeimage vijay3639/mazeimage:latest'
                 sh 'sudo docker tag mazeimage vijay3639/mazeimage:${BUILD_NUMBER}'
             }
@@ -28,12 +28,10 @@ pipeline {
             }
         }
         stage('Deploy on Kubernetes') {
-            agent { label 'k8s-server' }
             steps {
-                sh 'sudo kubectl apply -f /var/lib/jenkins/workspace/game-project/pod.yml'
+                sh 'sudo kubectl apply -f /home/vijay/workspace/game-project/pod.yml'
                 sh 'sudo kubectl rollout restart deployment loadbalancer-pod'
             }
         }
     }
 }
-
