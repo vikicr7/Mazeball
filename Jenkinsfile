@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'k8s-server' }
+    agent { label 'dep' }
     stages {
         stage('Pull Code From GitHub') {
             steps {
