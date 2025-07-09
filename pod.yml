@@ -27,5 +27,5 @@ spec:
     spec:
       containers:
         - name: hello
-          image: ragula/mazeimage:latest
+          image: vikicr7/mazeimage:latest
           imagePullPolicy: Always
