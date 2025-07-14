@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'dep' }
+    agent { label 'gaming' }
     stages {
         stage('Pull Code From GitHub') {
             steps {
