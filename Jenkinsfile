@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Build the Docker image') {
             steps {
-                sh 'sudo docker build -t mazeimage /root/deployment/workspace/deploy'
+                sh 'sudo docker build -t mazeimage /root/gamepath/workspace/gamingpipeline'
                 sh 'sudo docker tag mazeimage vikicr7/mazeimage:latest'
                 sh 'sudo docker tag mazeimage vikicr7/mazeimage:${BUILD_NUMBER}'
             }
@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Deploy on Kubernetes') {
             steps {
-                sh 'sudo kubectl apply -f /root/deployment/workspace/deploy/pod.yml'
+                sh 'sudo kubectl apply -f /root/gamepath/workspace/gamingpipeline/pod.yml'
                 sh 'sudo kubectl rollout restart deployment loadbalancer-pod'
             }
         }
